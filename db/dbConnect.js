@@ -3,9 +3,7 @@ import mongoose from "mongoose";
 
 const connectDB = () => {
     try{
-        mongoose.connect(process.env.DB_URL,{
-            useNewUrlParser: true,
-          })
+        mongoose.connect(process.env.DB_URL)
         console.log("Database connected")
     }
     catch(error){

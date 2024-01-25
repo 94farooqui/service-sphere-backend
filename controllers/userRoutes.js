@@ -6,9 +6,16 @@ export const getAllUsers = (req,res) => {
     return res.status(200).send({"msg":"Showing all Users"})
 }
 
-export const addNewUser = (req,res) => {
-    console.log(req.body)
-    return res.status(200).send({"msg":"Adding new User"})
+export const addNewUser = async (req,res) => {
+    const newUser = new User(req.body)
+    //console.log(req.body)
+    try{
+        const user = await newUser.save()
+        res.status(200).send(user)
+    }
+    catch(error){
+        res.status(401).send({"msg":"Something went wrong"})
+    }
 }
 
 export const updateUser = (req,res) => {

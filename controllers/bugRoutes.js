@@ -1,12 +1,27 @@
 import mongoose from "mongoose"
+import Bug from './../models/Bug.js'
 
-export const getAllBugs = (req,res) => {
-    console.log("Showing All Bugs")
-    return res.status(200).send({"msg":"Showing all bugs"})
+export const getAllBugs = async (req,res) => {
+    console.log("Showing All Projects")
+    try{
+        const bugs = await Bug.find()
+        return res.status(200).send(bugs)
+    }
+    catch(error){
+        return res.status(401).send({"error":"someting went wrong"})
+    }
 }
 
-export const addNewBug = (req,res) => {
-    return res.status(200).send({"msg":"Adding new bug"})
+export const addNewBug = async (req,res) => {
+    const newBug = new Bug(req.body)
+    console.log(req.body)
+    try{
+        const bug = await newBug.save()
+        return res.status(200).send(bug)
+    }
+    catch(error){
+        return res.status(401).send({"msg":"Something went wrong"})
+    }
 }
 
 export const updateBug = (req,res) => {

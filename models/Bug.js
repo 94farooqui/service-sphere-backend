@@ -1,17 +1,18 @@
 import mongoose, { Schema } from "mongoose";
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+import Inc from 'mongoose-sequence'
+const AutoIncrement = Inc(mongoose);
 
 const bugSchema = new mongoose.Schema({
     bug_id : {type : Number, unique: true},
     name : String,
     description : String,
     author : {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref : 'User'
     },
     dateCreated : {
         type : Date,
-        default : new Date.now()
+        default :  Date.now()
     },
     dateResolved : {
         type: Date,
