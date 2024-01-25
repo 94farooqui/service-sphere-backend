@@ -6,11 +6,11 @@ import {
   deleteBug,
 } from "../controllers/bugRoutes.js";
 
-const router = express.Router();
+const bugRouter = express.Router();
 
-router.get("/bugs", getAllBugs);
-router.post("/bugs", addNewBug);
-router.put("/bugs/:id", updateBug);
-router.delete("/bugs/:id", deleteBug);
+bugRouter.get("/", getAllBugs);
+bugRouter.post("/", addNewBug);
+bugRouter.put("/:id", updateBug);
+bugRouter.delete("/:id", deleteBug);
 
-export default router;
+export default bugRouter;
