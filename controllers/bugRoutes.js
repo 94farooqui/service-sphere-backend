@@ -14,7 +14,7 @@ export const getAllBugs = async (req,res) => {
 export const getBugDetails = async (req,res) => {
     //console.log(`getting details of bug with id ${req.params.id} `)
     try{
-        const bugs = await Bug.findOne({_id:req.params.id}).populate(["author","project","assignee"])
+        const bugs = await Bug.findOne({_id:req.params.id}).populate(["author","project","assignee","comms"])
         return res.status(200).send(bugs)
     }
     catch(error){
@@ -39,7 +39,8 @@ export const updateBug = (req,res) => {
 }
 
 export const deleteBug = (req,res) => {
-    return res.status(200).send({"msg":"deleting a bug"})
+    console.log(req.params.id)
+    //return res.status(200).send({"msg":"deleting a bug"})
 }
 
 

@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import Inc from 'mongoose-sequence'
+import { commentSchema } from "./Comment.js";
 const AutoIncrement = Inc(mongoose);
 
 const bugSchema = new mongoose.Schema({
@@ -26,7 +27,7 @@ const bugSchema = new mongoose.Schema({
         ref : 'User'
     },
     status : String,
-    comms : [{type: Schema.Types.ObjectId, ref:'Comment'}]
+    comms : [commentSchema]
     })
 
     bugSchema.plugin(AutoIncrement, { inc_field: 'bug_id' });
