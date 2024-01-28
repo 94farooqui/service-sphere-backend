@@ -13,10 +13,11 @@ const bugSchema = new mongoose.Schema({
     },
     dateCreated : {
         type : Date,
-        default :  Date.now()
+        default : Date.now()
     },
     dateResolved : {
         type: Date,
+        default : Date.now()
     },
     project : {
         type: Schema.Types.ObjectId,

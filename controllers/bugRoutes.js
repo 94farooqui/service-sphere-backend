@@ -14,8 +14,12 @@ export const getAllBugs = async (req,res) => {
 export const getBugDetails = async (req,res) => {
     //console.log(`getting details of bug with id ${req.params.id} `)
     try{
-        const bugs = await Bug.findOne({_id:req.params.id}).populate(["author","project","assignee","comms"])
-        return res.status(200).send(bugs)
+        const bug = await Bug.findOne({_id:req.params.id}).populate("author").populate("project").populate("assignee");
+        if(!bug){
+            return res.status(404).send({"msg":"details not found"})
+        }
+        console.log(bug)
+        return res.status(200).send(bug)
     }
     catch(error){
         return res.status(401).send({"error":"someting went wrong"})

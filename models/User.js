@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
     firtname : {
@@ -15,7 +15,9 @@ const userSchema = new mongoose.Schema({
     },
     password : {
         type: String
-    }
+    },
+    bug : { type : Schema.Types.ObjectId, ref : 'Bug'},
+    comments : { type : Schema.Types.ObjectId, ref : 'Comment'}
 })
 
 const User = mongoose.model('User',userSchema);
