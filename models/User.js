@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    firtname : {
+    firstname : {
         type : String,
         required : true
     },
@@ -16,8 +16,15 @@ const userSchema = new mongoose.Schema({
     password : {
         type: String
     },
-    bug : { type : Schema.Types.ObjectId, ref : 'Bug'},
-    comments : { type : Schema.Types.ObjectId, ref : 'Comment'}
+    mobile : {
+        type: String
+    },
+    roles: {
+        type : [String],
+        default: ['user']
+    }
+    // bug : { type : Schema.Types.ObjectId, ref : 'Bug'},
+    // comments : { type : Schema.Types.ObjectId, ref : 'Comment'}
 })
 
 const User = mongoose.model('User',userSchema);
