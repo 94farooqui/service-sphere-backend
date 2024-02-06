@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 import Project from './../models/Project.js'
 
 export const getAllProjects = async (req,res) => {
-    console.log("Showing All Projects")
+    //console.log("Showing All Projects")
     try{
         const pojects = await Project.find()
         return res.status(200).send(pojects)
@@ -15,7 +15,7 @@ export const getAllProjects = async (req,res) => {
 export const getProject = async (req,res) => {
     try{
         const project = await Project.findOne({_id: req.params.id})
-        console.log(project)
+        //console.log(project)
         return res.status(200).send(project)
     }
     catch(error){
