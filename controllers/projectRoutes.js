@@ -12,7 +12,17 @@ export const getAllProjects = async (req,res) => {
     }
     
 }
-
+export const getProject = async (req,res) => {
+    try{
+        const project = await Project.findOne({_id: req.params.id})
+        console.log(project)
+        return res.status(200).send(project)
+    }
+    catch(error){
+        console.log(error)
+        return res.status(404).send(error)
+    }
+}
 export const addNewProject = async (req,res) => {
     const newProject = new Project(req.body)
     //console.log(req.body)
