@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
+import { teamSchema } from "./Team.js";
 
 const projectSchema = new mongoose.Schema({
     name : {
@@ -8,7 +9,12 @@ const projectSchema = new mongoose.Schema({
     description : {
         type: String,
         default : "This is a project"
-    }
+    },
+    bugs : {
+        type : Schema.Types.ObjectId,
+        ref: "Bug"
+    },
+    teams: [teamSchema]
 })
 
 const Project = mongoose.model('Project', projectSchema)

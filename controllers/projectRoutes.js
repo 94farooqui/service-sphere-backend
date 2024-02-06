@@ -25,7 +25,7 @@ export const getProject = async (req,res) => {
 }
 export const addNewProject = async (req,res) => {
     const newProject = new Project(req.body)
-    //console.log(req.body)
+    console.log(req.body)
     try{
         const project = await newProject.save()
         res.status(200).send(project)
