@@ -39,6 +39,7 @@ export const addNewBug = async (req,res) => {
 }
 
 export const updateBug = (req,res) => {
+    console.log(req.body)
     return res.status(200).send({"msg":"updating a bug"})
 }
 
