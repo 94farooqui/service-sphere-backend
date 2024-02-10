@@ -4,7 +4,7 @@ import Bug from './../models/Bug.js'
 export const getAllBugs = async (req,res) => {
     //console.log("Showing All Projects")
     try{
-        const bugs = await Bug.find()
+        const bugs = await Bug.find().select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
         return res.status(200).send(bugs)
     }
     catch(error){
@@ -14,7 +14,7 @@ export const getAllBugs = async (req,res) => {
 export const getBugDetails = async (req,res) => {
     //console.log(`getting details of bug with id ${req.params.id} `)
     try{
-        const bug = await Bug.findOne({_id:req.params.id}).populate("author").populate("project").populate("assignee");
+        const bug = await Bug.findOne({_id:req.params.id}).populate("author").populate("project").populate("assignee").select("-comms");
         if(!bug){
             return res.status(404).send({"msg":"details not found"})
         }
