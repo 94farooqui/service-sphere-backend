@@ -66,3 +66,15 @@ export const userRegister = async (req,res) => {
       }
 }
 
+export const tokenVerify = async (req,res) => {
+    const {token} = req.body;
+    console.log(req.body)
+    try{
+        const decoded = jwt.verify(token , process.env.SECRET_KEY)
+        return decoded
+    }
+    catch(error){
+        return res.send({msg:"Invalid token"})
+    }
+
+}

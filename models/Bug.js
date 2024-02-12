@@ -23,10 +23,10 @@ const bugSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref : 'Project'
     },
-    assignee: {
+    assignee: [{
         type: Schema.Types.ObjectId,
         ref : 'User'
-    },
+    }],
     status : String,
     comms : [commentSchema]
     })

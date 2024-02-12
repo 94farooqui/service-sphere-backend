@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
 import User from "../models/User.js"
 
-export const getAllUsers = (req,res) => {
+export const getAllUsers = async (req,res) => {
     console.log("Showing All Users")
-    return res.status(200).send({"msg":"Showing all Users"})
+    const users = await User.find()
+    return res.status(200).json(users)
 }
 
 export const addNewUser = async (req,res) => {

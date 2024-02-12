@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import Bug from './../models/Bug.js'
+import Project from "../models/Project.js"
 
 export const getAllBugs = async (req,res) => {
     //console.log("Showing All Projects")
@@ -38,9 +39,24 @@ export const addNewBug = async (req,res) => {
     }
 }
 
-export const updateBug = (req,res) => {
+export const updateBug = async (req,res) => {
+    const id = req.params.id;
+    const updatedDetails = req.body
+
+
+    const foundBug = Bug.findById(id)
+    if(!foundBug) return res.status(400).json({error:'Bad request'})
+
+    const newProjectId = await Project.findOne({name : updatedDetails.project}).select("_id")
+
+    const updatedBug = await Bug.findByIdAndUpdate(id, {...updatedDetails, project:newProjectId})
+
+    if(updatedBug){
+        return res.status(200).json(updateBug)
+    }
+
     console.log(req.body)
-    return res.status(200).send({"msg":"updating a bug"})
+    return res.status(400).json({error:'Bad request'})
 }
 
 export const deleteBug = (req,res) => {
