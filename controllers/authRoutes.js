@@ -9,6 +9,7 @@ export const userLogin = async (req,res) => {
     const user = await User.findOne({email: email});
 
     if(!user){
+        console.log("User not found")
         return res.status(400).send('User does not exists.');
     }
 
@@ -25,9 +26,6 @@ export const userLogin = async (req,res) => {
 }
 
 export const userRegister = async (req,res) => {
-
-    //console.log("Received data",req.body)
-    
     
     try {
     
@@ -41,13 +39,7 @@ export const userRegister = async (req,res) => {
     
         // Hash the password
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    
-        // Save the user
-        // firstname: 'Mubasshir',
-        // lastname: 'Farppqio',
-        // email: 'masdja@gmail.com',
-        // password: '123',
-        // mobile: '9700278105'
+
 
         let newUser = new User({
             firstname : req.body.firstname,
@@ -68,10 +60,11 @@ export const userRegister = async (req,res) => {
 
 export const tokenVerify = async (req,res) => {
     const {token} = req.body;
-    console.log(req.body)
+    //console.log("Req Body ",token)
     try{
         const decoded = jwt.verify(token , process.env.SECRET_KEY)
-        return decoded
+        console.log(decoded)
+        return res.send(decoded)
     }
     catch(error){
         return res.send({msg:"Invalid token"})
