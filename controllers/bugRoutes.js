@@ -19,7 +19,7 @@ export const getBugDetails = async (req,res) => {
         if(!bug){
             return res.status(404).send({"msg":"details not found"})
         }
-        console.log(bug)
+        // console.log(bug)
         return res.status(200).send(bug)
     }
     catch(error){
@@ -42,20 +42,21 @@ export const addNewBug = async (req,res) => {
 export const updateBug = async (req,res) => {
     const id = req.params.id;
     const updatedDetails = req.body
+    console.log("ID",id)
 
 
     const foundBug = Bug.findById(id)
     if(!foundBug) return res.status(400).json({error:'Bad request'})
 
-    const newProjectId = await Project.findOne({name : updatedDetails.project}).select("_id")
+    // const newProjectId = await Project.findOne({name : updatedDetails.project}).select("_id")
 
-    const updatedBug = await Bug.findByIdAndUpdate(id, {...updatedDetails, project:newProjectId})
+    const updatedBug = await Bug.findByIdAndUpdate(id, {...updatedDetails, author:updatedDetails.author._id,project:updatedDetails.project._id,assignee:updatedDetails.assignee._id})
 
     if(updatedBug){
         return res.status(200).json(updateBug)
     }
 
-    console.log(req.body)
+    // console.log(req.body)
     return res.status(400).json({error:'Bad request'})
 }
 

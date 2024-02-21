@@ -23,6 +23,16 @@ const bugSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref : 'Project'
     },
+    status: {
+        type: String,
+        default: "Open"
+    },
+    priority: {
+        type: String
+    },
+    type:{
+        type: String
+    },
     assignee: [{
         type: Schema.Types.ObjectId,
         ref : 'User'
