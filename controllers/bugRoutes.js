@@ -53,7 +53,8 @@ export const updateBug = async (req,res) => {
     const updatedBug = await Bug.findByIdAndUpdate(id, {...updatedDetails, author:updatedDetails.author._id,project:updatedDetails.project._id,assignee:updatedDetails.assignee._id})
 
     if(updatedBug){
-        return res.status(200).json(updateBug)
+        console.log(updatedBug)
+        return res.status(200).json(updatedBug)
     }
 
     // console.log(req.body)
