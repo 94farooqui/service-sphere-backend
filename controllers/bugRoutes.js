@@ -3,8 +3,22 @@ import Bug from './../models/Bug.js'
 import Project from "../models/Project.js"
 
 export const getAllBugs = async (req,res) => {
+    console.log("Query",req.query)
     //console.log("Showing All Projects")
     try{
+
+        const {status} = req.query
+
+        if(status){
+            if(status == 'All'){
+                const bugs = await Bug.find().select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
+                return res.status(200).send(bugs)
+            }
+            console.log("Showing filtered results")
+            const bugs = await Bug.find({status: status}).select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
+            return res.status(200).send(bugs)
+
+        }
         const bugs = await Bug.find().select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
         return res.status(200).send(bugs)
     }
