@@ -23,6 +23,9 @@ const bugSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref : 'Project'
     },
+    domain: {
+        type: String
+    },
     status: {
         type: String,
         default: "Open"

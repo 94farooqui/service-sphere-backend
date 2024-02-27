@@ -2,8 +2,9 @@ import mongoose from "mongoose"
 import Bug from './../models/Bug.js'
 import Project from "../models/Project.js"
 
-export const getAllBugs = async (req,res) => {
-    console.log("Query",req.query)
+
+export const getAllBugs = async ( req,res) => {
+    console.log("Query",req.user)
     //console.log("Showing All Projects")
     try{
 
@@ -11,15 +12,15 @@ export const getAllBugs = async (req,res) => {
 
         if(status){
             if(status == 'All'){
-                const bugs = await Bug.find().select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
+                const bugs = await Bug.find({domain: req.user.domain}).select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
                 return res.status(200).send(bugs)
             }
             console.log("Showing filtered results")
-            const bugs = await Bug.find({status: status}).select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
+            const bugs = await Bug.find({status: status,domain: req.user.domain}).select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
             return res.status(200).send(bugs)
 
         }
-        const bugs = await Bug.find().select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
+        const bugs = await Bug.find({domain: req.user.domain}).select({  bug_id:1,name:1,description:1,dateCreated:1,status:1})
         return res.status(200).send(bugs)
     }
     catch(error){

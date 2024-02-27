@@ -16,7 +16,7 @@ export const userLogin = async (req,res) => {
     if(!passwordMatch){
         return res.status(400).send('Password does not match.');
     }
-    const token = jwt.sign({email, firstname:user.firstname, lastname: user.lastname}, process.env.SECRET_KEY)
+    const token = jwt.sign({email, firstname:user.firstname, lastname: user.lastname, domain: user.domain}, process.env.SECRET_KEY)
     return res.status(200).json({token})
 }
 

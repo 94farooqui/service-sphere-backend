@@ -22,6 +22,9 @@ export const userSchema = new mongoose.Schema({
     roles: {
         type : [String],
         default: ['user']
+    },
+    domain:{
+        type: String
     }
     // bug : { type : Schema.Types.ObjectId, ref : 'Bug'},
     // comments : { type : Schema.Types.ObjectId, ref : 'Comment'}

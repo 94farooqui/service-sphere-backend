@@ -1,10 +1,11 @@
 import express from "express";
 import {  getAllBugs,  addNewBug,  updateBug,  deleteBug,  getBugDetails} from "../controllers/bugRoutes.js";
 import { getAllComments,getComment,addComment,updateComment,deleteComment } from "../controllers/commentRoute.js";
+import authenticateToken from "../middlewares/authMiddleware.js";
 
 const bugRouter = express.Router();
 
-bugRouter.get("/", getAllBugs);
+bugRouter.get("/", authenticateToken,getAllBugs);
 bugRouter.get("/:id", getBugDetails);
 bugRouter.post("/", addNewBug);
 bugRouter.put("/:id", updateBug);
